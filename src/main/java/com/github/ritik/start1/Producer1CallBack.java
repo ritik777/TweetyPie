@@ -20,26 +20,31 @@ public class Producer1CallBack {
 //producer
         KafkaProducer<String,String> producer = new KafkaProducer<String, String>(properties);
 
-        ProducerRecord<String,String> record = new ProducerRecord<String, String>( "first_topic", "Hello World");
+        for(int i=0;i<10;i++){
 
-        producer.send(record, new Callback() {
-            public void onCompletion(RecordMetadata recordMetadata, Exception e) {
-                //executes everytime when a record is sent successfully or exception is thrown
-                if(e== null){
-                    //sent successfully
-                    logger.info("Recieved new Meta data. \n" +
-                            "Topic" + recordMetadata.topic() + "\n" +
-                            "Partition" + recordMetadata.partition() + "\n" +
-                            "Offset" + recordMetadata.offset() + "\n" +
-                            "Timestamp" + recordMetadata.timestamp() );
+            ProducerRecord<String,String> record = new ProducerRecord<String, String>( "first_topic", "Hello World"+ Integer.toString(i));
+
+            producer.send(record, new Callback() {
+                public void onCompletion(RecordMetadata recordMetadata, Exception e) {
+                    //executes everytime when a record is sent successfully or exception is thrown
+                    if(e== null){
+                        //sent successfully
+                        logger.info("Recieved new Meta data. \n" +
+                                "Topic" + recordMetadata.topic() + "\n" +
+                                "Partition" + recordMetadata.partition() + "\n" +
+                                "Offset" + recordMetadata.offset() + "\n" +
+                                "Timestamp" + recordMetadata.timestamp() );
+
+                    }
+                    else{
+                        logger.error("error while producing",e);
+                    }
 
                 }
-                else{
-                    logger.error("error while producing",e);
-                }
+            });
+        }
 
-            }
-        });
+
         producer.flush();
         producer.close();
     }
