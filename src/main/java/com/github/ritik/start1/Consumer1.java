@@ -16,18 +16,18 @@ import java.util.Properties;
 public class Consumer1 {
     public static void main(String[] args) {
 
-        BasicConfigurator.configure();
-        final Logger logger = LoggerFactory.getLogger(Consumer1.class);
-        String bootstrapServer = "127.0.0.1:9092";
-        String groupid= "first-class";
 
+        final Logger logger = LoggerFactory.getLogger(Consumer1.class.getName());
+        String bootstrapServer = "127.0.0.1:9092";
+        String groupId= "second-class";
+        //BasicConfigurator.configure();
         //create consumer configurations
         Properties properties = new Properties();
         properties.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServer);
         properties.setProperty(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         properties.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,StringDeserializer.class.getName());
-        properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG,groupid);
-        properties.setProperty(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "latest");
+        properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG,groupId);
+        properties.setProperty(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
 
         //create consumer
         KafkaConsumer<String,String> consumer = new KafkaConsumer<>(properties);
@@ -45,6 +45,7 @@ public class Consumer1 {
 
               }
           }
+
 
     }
 }

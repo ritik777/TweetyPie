@@ -11,7 +11,7 @@ import java.util.concurrent.ExecutionException;
 
 public class ProducerKeys {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
-        BasicConfigurator.configure();
+       // BasicConfigurator.configure();
         final Logger logger = LoggerFactory.getLogger(ProducerKeys.class);
 //Setting producer properties
         Properties properties = new Properties();
