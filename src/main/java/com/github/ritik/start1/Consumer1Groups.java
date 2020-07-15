@@ -5,7 +5,6 @@ import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.serialization.StringDeserializer;
-import org.apache.log4j.BasicConfigurator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,11 +12,11 @@ import java.time.Duration;
 import java.util.Collections;
 import java.util.Properties;
 
-public class Consumer1 {
+public class Consumer1Groups {
     public static void main(String[] args) {
 
 
-        final Logger logger = LoggerFactory.getLogger(Consumer1.class.getName());
+        final Logger logger = LoggerFactory.getLogger(Consumer1Groups.class.getName());
         String bootstrapServer = "127.0.0.1:9092";
         String groupId= "third-class";
         //BasicConfigurator.configure();
